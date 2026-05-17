@@ -43,9 +43,7 @@ void inicializar () {
 void leerVotos () {
 
     do {
-
         printf ("Hola, oyente numero %d, que canciones pones en tu top?\n", j);
-
         printf ("0. Cancion cero.\n");
         printf ("1. Cancion uno.\n");
         printf ("2. Cancion dos.\n");
@@ -59,135 +57,92 @@ void leerVotos () {
         printf ("-1. Resultados.\n");
 
         for (puntaje=3; puntaje>0; puntaje--) {
-
             cont=0;
-
             printf ("Cual es la cancion que para ti esta en el top %d ?\n", top);
-
             do {
-
                 scanf ("%d", &op);
-
                 if (op == ant[0] || op == ant[1])
                     printf ("No puedes repetir canciones.\n");
-
                 else {
-
                     if (op>=0 && op<=9)
                         cont=1;
-
                     else if (op != -1)
                         printf ("Dame un valor del 0 al 9\n");
                 }
 
             } while (cont != 1 && op != -1);
-
             if (op == -1)
                 break;
-
+            
             ant[3-puntaje]=op;
-
             vect[op][j]=puntaje;
-
             ++top;
         }
 
-        top=1;
-
-        ant[0]=47667;
-        ant[1]=32432;
-
+        top=1; ant[0]=47667; ant[1]=32432;
         ++j;
 
     } while (j<100 && op!=-1);
-
     --j;
-
     for (i=0; i<10; i++)
         vect[i][j]=0;
 }
 
+
 void calcularCanciones () {
-
     for (cont=0; cont<j; cont++) {
-
         for (i=0; i<10; i++) {
-
             pcont[i]+=vect[i][cont];
         }
     }
 
     printf ("\n");
 
-    for (i=0; i<10; i++)
-        printf ("Cancion %d: %d votos\n", i, pcont[i]);
-
-    k=0;
-
-    for (i=0; i<10; i++) {
-
-        if (pcont[i] > pcont[k])
-            k=i;
+  k=0;
+  for (i=0; i<10; i++) {
+    if (pcont[i] > pcont[k])
+      k=i;
+  }
+  printf ("La musica preferida es la cancion %d \n", k+1);
+    
+  n=0;
+  for (i=0; i<10; i++) {
+    if (i != k) {
+      if (pcont[i] > pcont[n] || n == k)
+        n=i;
     }
-
-    printf ("\n1a cancion: %d\n", k);
-
-    n=0;
-
-    for (i=0; i<10; i++) {
-
-        if (i != k) {
-
-            if (pcont[i] > pcont[n] || n == k)
-                n=i;
-        }
-    }
-
-    printf ("2a cancion: %d\n\n", n);
+  }
+  printf ("La segunda musica preferida es la cancion %d \n", n+1);
 }
 
 void calcularGanador () {
-
     for (cont=0; cont<j; cont++) {
-
         puntper[cont]=0;
-
         if (vect[k][cont]!=0)
             puntper[cont]+=30;
-
         if (vect[n][cont]!=0)
             puntper[cont]+=20;
-
         if ((vect[k][cont]!=0) && (vect[n][cont]!=0))
             puntper[cont]+=10;
     }
 
-    for (i=0; i<j; i++)
-        printf ("Oyente %d: %d puntos\n", i, puntper[i]);
-
     k=0;
-
     for (i=0; i<j; i++) {
-
         if (puntper[i] > puntper[k])
             k=i;
     }
 
     n=0;
-
     for (i=0; i<j; i++) {
 
         if (puntper[i] == puntper[k]) {
-
             topoyent[n]=i;
             ++n;
         }
     }
 
-    printf ("\nGanador: ");
-
-    for (cont=0; cont<n; cont++)
-        printf ("Oyente numero %d ", topoyent[cont]+1);
-
-    printf ("\n");
+  printf ("Oyentes con mayor cantidad de puntos: ");
+  for (cont=0; cont<n; cont++)
+    printf ("Oyente %d ,", topoyent[cont]+1);
+  printf ("\n\n");
 }
