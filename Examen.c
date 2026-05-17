@@ -43,7 +43,7 @@ void inicializar () {
 void leerVotos () {
 
     do {
-        printf ("Hola, oyente numero %d, que canciones pones en tu top?\n", j);
+        printf ("Hola, oyente numero %d, que canciones pones en tu top?\n", j+1);
         printf ("0. Cancion cero.\n");
         printf ("1. Cancion uno.\n");
         printf ("2. Cancion dos.\n");
