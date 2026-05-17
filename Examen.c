@@ -194,7 +194,7 @@ void calcularGanador () {
     printf ("\nGanador: ");
 
     for (cont=0; cont<n; cont++)
-        printf ("Oyente numero %d ", topoyent[cont]);
+        printf ("Oyente numero %d ", topoyent[cont]+1);
 
     printf ("\n");
 }
